@@ -1,16 +1,20 @@
 package com.example.cashFlow.tracking.model.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.example.cashFlow.tracking.validations.BasicDataValidation;
 import com.example.cashFlow.tracking.validations.UpdateDataValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
@@ -26,6 +30,7 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
+	@Column(length = 40)
 	private String id;
 
 	@Column(nullable = false, 
@@ -60,6 +65,10 @@ public class User implements Serializable {
 		max = 20, 
 		message = "User's 'password' property size must be between 8 and 20 characters.")
 	private String password;
+	
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private List<CashFlow> cashFlows = new ArrayList<CashFlow>();
 
 	public User() {}
 	
@@ -109,6 +118,10 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<CashFlow> getCashFlows() {
+		return cashFlows;
 	}
 
 	@Override

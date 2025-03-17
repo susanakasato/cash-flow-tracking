@@ -94,6 +94,10 @@ public class CashFlow implements Serializable {
 	public List<CashFlowDetail> getCashFlowDetails() {
 		return cashFlowDetails;
 	}
+	
+	public Double getTotal() {
+		return getCashFlowDetails().stream().map(cashFlowDetail -> cashFlowDetail.getAmount()).reduce(0.0, (a, b) -> a + b);
+	}
 
 	@Override
 	public int hashCode() {

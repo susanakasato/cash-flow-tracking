@@ -68,7 +68,11 @@ public class DevConfig implements CommandLineRunner{
 		subcategoryService.insert(subcategory2, category1.getId());
 		
 		CashFlowDetail cashFlowDetail1 = new CashFlowDetail(null, "Month bill", "month 2023-03", 700.00, category1, subcategory1);
+		CashFlowDetail cashFlowDetail2 = new CashFlowDetail(null, "Medicine", "Flu medicine", 20.00, category1, subcategory2);
+		CashFlowDetail cashFlowDetail3 = new CashFlowDetail(null, "Supermarket", "weekly purchase", 250.00, category2, null);
 		cashFlowDetailService.insert(cashFlowDetail1, cashFlow1.getId());
+		cashFlowDetailService.insert(cashFlowDetail2, cashFlow1.getId());
+		cashFlowDetailService.insert(cashFlowDetail3, cashFlow1.getId());
 	}
 
 }

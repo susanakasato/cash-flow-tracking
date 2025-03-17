@@ -9,6 +9,7 @@ import com.example.cashFlow.tracking.validations.BasicDataValidation;
 import com.example.cashFlow.tracking.validations.UpdateDataValidation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -66,9 +67,13 @@ public class User implements Serializable {
 		message = "User's 'password' property size must be between 8 and 20 characters.")
 	private String password;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	private List<CashFlow> cashFlows = new ArrayList<CashFlow>();
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+	@JsonIgnore
+	private List<Category> categories = new ArrayList<Category>();
 
 	public User() {}
 	
@@ -122,6 +127,10 @@ public class User implements Serializable {
 	
 	public List<CashFlow> getCashFlows() {
 		return cashFlows;
+	}
+	
+	public List<Category> getCategories() {
+		return categories;
 	}
 
 	@Override

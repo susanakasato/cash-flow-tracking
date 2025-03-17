@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.cashFlow.tracking.model.entities.CashFlow;
-import com.example.cashFlow.tracking.model.entities.User;
 import com.example.cashFlow.tracking.model.services.CashFlowService;
 
 @RestController
@@ -34,9 +33,7 @@ public class CashFlowController {
 	
 	@GetMapping("/user/{userId}")
 	public ResponseEntity<List<CashFlow>> findByUser(@PathVariable String userId) {
-		User user = new User();
-		user.setId(userId);
-		List<CashFlow> cashFlows = service.findByUser(user);
+		List<CashFlow> cashFlows = service.findByUser(userId);
 		return ResponseEntity.ok(cashFlows);
 	}
 	

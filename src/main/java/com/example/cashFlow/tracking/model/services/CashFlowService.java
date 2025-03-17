@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.example.cashFlow.tracking.exceptions.DataValidationException;
 import com.example.cashFlow.tracking.exceptions.ResourceNotFoundException;
 import com.example.cashFlow.tracking.model.entities.CashFlow;
-import com.example.cashFlow.tracking.model.entities.User;
 import com.example.cashFlow.tracking.model.entities.enums.CashFlowOperation;
 import com.example.cashFlow.tracking.model.repositories.CashFlowRepository;
 import com.example.cashFlow.tracking.validations.BasicDataValidation;
@@ -31,8 +30,8 @@ public class CashFlowService {
 		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Cash flow of id #%s not found in database.", id)));
 	}
 	
-	public List<CashFlow> findByUser(User user) {
-		return repository.findByUser(user);
+	public List<CashFlow> findByUser(String userId) {
+		return repository.findByUser(userService.findById(userId));
 	}
 	
 	public CashFlow insert(String userId, CashFlow cashflow) {

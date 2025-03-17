@@ -31,15 +31,17 @@ public class CashFlow implements Serializable {
 	
 	@NotNull(message = "Cash flow's 'date' can't be null.",
 			groups = BasicDataValidation.class)
+	@Column(nullable = false)
 	private LocalDate date;
 	
 	@NotNull(message = "Cash flow's 'operation' can't be null.",
 			groups = BasicDataValidation.class)
+	@Column(nullable = false)
 	private String operation;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JsonIgnore
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
 	public CashFlow() {}

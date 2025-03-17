@@ -4,18 +4,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.example.cashFlow.tracking.validations.BasicDataValidation;
-import com.example.cashFlow.tracking.validations.UpdateDataValidation;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
 
 @MappedSuperclass
 public abstract class CategorySuper implements Serializable {
@@ -30,13 +25,6 @@ public abstract class CategorySuper implements Serializable {
 	@NotNull(message = "'Name' of category or subcategory can't be null.", 
 			groups = BasicDataValidation.class)
 	private String name;
-	
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = true)
-	@Null(message = "Can't change the owner user of category or subcategory.",
-			groups = UpdateDataValidation.class)
-	@JsonIgnore
-	private User user;
 	
 	public CategorySuper() {}
 
@@ -59,14 +47,6 @@ public abstract class CategorySuper implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	@Override

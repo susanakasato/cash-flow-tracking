@@ -1,12 +1,15 @@
 package com.example.cashFlow.tracking.model.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +22,10 @@ public class Subcategory extends CategorySuper implements Serializable{
 	@JoinColumn(name = "category_id", nullable = false)
 	@JsonIgnore
 	private Category category;
+	
+	@OneToMany(mappedBy = "subcategory")
+	@JsonIgnore
+	private List<CashFlowDetail> cashFlowDetails = new ArrayList<CashFlowDetail>();
 	
 	public Subcategory() {}
 	

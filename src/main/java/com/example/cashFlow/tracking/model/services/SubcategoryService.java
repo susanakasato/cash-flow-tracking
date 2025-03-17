@@ -36,9 +36,9 @@ public class SubcategoryService {
 	}
 	
 	public Subcategory update(Integer id, Subcategory subcategoryToUpdate, Integer changedCategoryId) {
-		Subcategory subcategory = this.findById(id);
-		Optional<String> exceptionMessages = Validation.getValidationExceptionMessage(subcategory, Default.class, UpdateDataValidation.class);
+		Optional<String> exceptionMessages = Validation.getValidationExceptionMessage(changedCategoryId, Default.class, UpdateDataValidation.class);
 		if (exceptionMessages.isEmpty()) {
+			Subcategory subcategory = this.findById(id);
 			if (subcategoryToUpdate.getName() != null) subcategory.setName(subcategoryToUpdate.getName());
 			if (changedCategoryId != null) subcategory.setCategory(categoryService.findById(changedCategoryId));
 			return repository.save(subcategory);

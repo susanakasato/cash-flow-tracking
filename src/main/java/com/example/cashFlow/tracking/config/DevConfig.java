@@ -8,10 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.example.cashFlow.tracking.model.entities.CashFlow;
+import com.example.cashFlow.tracking.model.entities.CashFlowDetail;
 import com.example.cashFlow.tracking.model.entities.Category;
 import com.example.cashFlow.tracking.model.entities.Subcategory;
 import com.example.cashFlow.tracking.model.entities.User;
 import com.example.cashFlow.tracking.model.entities.enums.CashFlowOperation;
+import com.example.cashFlow.tracking.model.services.CashFlowDetailService;
 import com.example.cashFlow.tracking.model.services.CashFlowService;
 import com.example.cashFlow.tracking.model.services.CategoryService;
 import com.example.cashFlow.tracking.model.services.SubcategoryService;
@@ -32,6 +34,9 @@ public class DevConfig implements CommandLineRunner{
 	
 	@Autowired
 	private SubcategoryService subcategoryService;
+	
+	@Autowired
+	private CashFlowDetailService cashFlowDetailService;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -61,6 +66,9 @@ public class DevConfig implements CommandLineRunner{
 		Subcategory subcategory2 = new Subcategory(null, "Medicine");
 		subcategoryService.insert(subcategory1, category1.getId());
 		subcategoryService.insert(subcategory2, category1.getId());
+		
+		CashFlowDetail cashFlowDetail1 = new CashFlowDetail(null, "Month bill", "month 2023-03", 700.00, category1, subcategory1);
+		cashFlowDetailService.insert(cashFlowDetail1, cashFlow1.getId());
 	}
 
 }

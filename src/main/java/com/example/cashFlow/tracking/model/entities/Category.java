@@ -31,6 +31,10 @@ public class Category extends CategorySuper implements Serializable {
 	
 	@OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private List<Subcategory> subcategories = new ArrayList<Subcategory>();
+
+	@OneToMany(mappedBy = "category")
+	@JsonIgnore
+	private List<CashFlowDetail> cashFlowDetails = new ArrayList<CashFlowDetail>();
 	
 	public Category() {}
 	

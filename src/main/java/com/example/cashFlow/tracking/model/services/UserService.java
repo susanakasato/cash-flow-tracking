@@ -21,6 +21,10 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 	
+	public User findById(String id) {
+		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("User of id #%s not found in database.", id)));
+	}
+	
 	public User insert(User user) {
 		Optional<String> exceptionMessage = Validation.getValidationExceptionMessage(user, Default.class, BasicDataValidation.class);
 		if (exceptionMessage.isEmpty()) return repository.save(user);
@@ -39,7 +43,7 @@ public class UserService {
 	}
 	
 	public void delete(String id) {
-		User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No such id found in database."));
+		User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("User of id #%s not found in database.", id)));
 		repository.delete(user);
 	}
 }

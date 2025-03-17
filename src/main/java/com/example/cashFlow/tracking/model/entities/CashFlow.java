@@ -45,7 +45,6 @@ public class CashFlow implements Serializable {
 	public CashFlow() {}
 
 	public CashFlow(String id, LocalDate date, CashFlowOperation operation) {
-		super();
 		this.id = id;
 		this.date = date;
 		this.operation = operation.getCode();

@@ -28,7 +28,7 @@ public class UserService {
 	public User insert(User user) {
 		Optional<String> exceptionMessage = Validation.getValidationExceptionMessage(user, Default.class, BasicDataValidation.class);
 		if (exceptionMessage.isEmpty()) return repository.save(user);
-		else throw new DataValidationException(exceptionMessage.get());
+		throw new DataValidationException(exceptionMessage.get());
 	}
 	
 	public User update(String id, User userToUpdate) {
@@ -39,11 +39,11 @@ public class UserService {
 			if (userToUpdate.getUsername() != null) user.setUsername(userToUpdate.getUsername());
 			if (userToUpdate.getPassword() != null) user.setPassword(userToUpdate.getPassword());
 			return repository.save(user);
-		} else throw new DataValidationException(exceptionMessage.get());
+		}
+		throw new DataValidationException(exceptionMessage.get());
 	}
 	
 	public void delete(String id) {
-		User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("User of id #%s not found in database.", id)));
-		repository.delete(user);
+		repository.delete(this.findById(id));
 	}
 }

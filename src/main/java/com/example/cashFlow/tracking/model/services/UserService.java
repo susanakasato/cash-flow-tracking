@@ -25,6 +25,11 @@ public class UserService {
 		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("User of id #%s not found in database.", id)));
 	}
 	
+	public User findByUsername(String username) throws ResourceNotFoundException {
+		return repository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException(String.format("User of username '%s' not found in database.", username)));
+		
+	}
+	
 	public User insert(User user) {
 		Optional<String> exceptionMessage = Validation.getValidationExceptionMessage(user, Default.class, BasicDataValidation.class);
 		if (exceptionMessage.isEmpty()) return repository.save(user);

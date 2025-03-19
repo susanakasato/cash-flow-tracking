@@ -59,12 +59,12 @@ public class User implements Serializable {
 	@Email(message = "User's 'email' must have email address format.")
 	private String email;
 
-	@Column(nullable = false, length = 20)
+	@Column(nullable = false)
 	@NotNull(message = "User's 'password' property can't be null.",
 			groups = BasicDataValidation.class)
-	@Size(min = 8, 
-		max = 20, 
-		message = "User's 'password' property size must be between 8 and 20 characters.")
+//	@Size(min = 8, 
+//		max = 20, 
+//		message = "User's 'password' property size must be between 8 and 20 characters.")
 	private String password;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)

@@ -41,12 +41,12 @@ public class DevConfig implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 
-		User user1 = new User(null, "David Williams", "david123", "david@gmail.com", "12341234");
-		User user2 = new User(null, "James Miller", "jamesmiller", "james@gmail.com", "james123");
-		User user3 = new User(null, "Elizabeth Johnson", "elizabethj", "elizabeth@gmail.com", "elijohnson");
+		User user1 = new User(null, "David Williams", "david", "david@gmail.com", "$2a$10$f3.lSCjriGvirUp5so5U5.5vm5oBLAm9kZv84n9NLhN1rd9mT3VsW");
+//		User user2 = new User(null, "James Miller", "jamesmiller", "james@gmail.com", "james123");
+//		User user3 = new User(null, "Elizabeth Johnson", "elizabethj", "elizabeth@gmail.com", "elijohnson");
 		userService.insert(user1);
-		userService.insert(user2);
-		userService.insert(user3);
+//		userService.insert(user2);
+//		userService.insert(user3);
 		
 		CashFlow cashFlow1 = new CashFlow(null, LocalDate.now(), CashFlowOperation.IN);
 		CashFlow cashFlow2 = new CashFlow(null, LocalDate.now(), CashFlowOperation.OUT);

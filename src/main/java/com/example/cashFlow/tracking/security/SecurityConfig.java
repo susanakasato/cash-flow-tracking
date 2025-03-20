@@ -6,6 +6,7 @@ import java.security.interfaces.RSAPublicKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -33,10 +34,12 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		System.out.println("PASSO 1");
 		http.csrf(csrf -> csrf.disable())
+			.headers(headers -> headers.frameOptions(options -> options.disable()))
 			.authorizeHttpRequests(
 					auth -> auth.requestMatchers("/auth").permitAll()
+						.requestMatchers(HttpMethod.POST, "/users").permitAll()
+						.requestMatchers("/h2/**").permitAll()
 						.anyRequest().authenticated())
 			.httpBasic(Customizer.withDefaults())
 			.oauth2ResourceServer(

@@ -3,6 +3,7 @@ package com.example.cashFlow.tracking.model.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import com.example.cashFlow.tracking.exceptions.DataValidationException;
@@ -31,6 +32,7 @@ public class UserService {
 	}
 	
 	public User insert(User user) {
+		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10)));
 		Optional<String> exceptionMessage = Validation.getValidationExceptionMessage(user, Default.class, BasicDataValidation.class);
 		if (exceptionMessage.isEmpty()) return repository.save(user);
 		throw new DataValidationException(exceptionMessage.get());

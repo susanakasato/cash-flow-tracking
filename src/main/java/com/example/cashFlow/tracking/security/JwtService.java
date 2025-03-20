@@ -18,16 +18,11 @@ public class JwtService {
 	public String generateToken(Authentication authentication) {
 		Instant now = Instant.now();
 		Long expiration = 3600L;
-//		String scopes = authentication.getAuthorities().stream()
-//				.map(GrantedAuthority::getAuthority)
-//				.collect(Collectors.joining(" "));
-		
 		var claims = JwtClaimsSet.builder()
 				.issuer("tracking")
 				.issuedAt(now)
 				.expiresAt(now.plusSeconds(expiration))
 				.subject(authentication.getName())
-//				.claim("scope", scopes)
 				.build();
 		return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 	}

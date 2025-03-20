@@ -1,7 +1,6 @@
 package com.example.cashFlow.tracking.security;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +18,7 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(() -> "read", () -> "edit");
+		return null;
 	}
 
 	@Override

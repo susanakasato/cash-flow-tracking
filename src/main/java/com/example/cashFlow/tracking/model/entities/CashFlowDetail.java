@@ -42,11 +42,11 @@ public class CashFlowDetail implements Serializable{
 	private Double amount;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "category_id", foreignKey = @ForeignKey(foreignKeyDefinition = "foreign (category_id) references tb_category on delete set null"))
+	@JoinColumn(name = "category_id", foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (category_id) references tb_category on delete set null"))
 	private Category category;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "subcategory_id", foreignKey = @ForeignKey(foreignKeyDefinition = "foreign (subcategory_id) references tb_subcategory on delete set null"))
+	@JoinColumn(name = "subcategory_id", foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (subcategory_id) references tb_subcategory on delete set null"))
 	private Subcategory subcategory;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE)
